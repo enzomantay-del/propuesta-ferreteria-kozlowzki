@@ -340,6 +340,93 @@
       color: var(--kz-text);
       font-weight: 700;
     }
+
+    @media (max-width: 991.98px) {
+      .navbar-kz .navbar-collapse {
+        margin-top: 0.75rem;
+        padding: 0.75rem;
+        border: 1px solid var(--kz-border);
+        border-radius: 0.75rem;
+        background: rgba(12, 12, 14, 0.95);
+        max-height: 70vh;
+        overflow-y: auto;
+      }
+
+      .navbar-kz .nav-link {
+        padding: 0.55rem 0.7rem !important;
+      }
+
+      .hero {
+        padding-top: 6.5rem;
+      }
+    }
+
+    @media (max-width: 767.98px) {
+      section {
+        padding: 3rem 0;
+      }
+
+      .hero {
+        padding-top: 5.5rem;
+        padding-bottom: 3rem;
+      }
+
+      .hero h1 {
+        font-size: clamp(1.7rem, 7vw, 2.2rem);
+      }
+
+      .hero-lead {
+        font-size: 1rem;
+      }
+
+      .hero-card {
+        padding: 1rem;
+      }
+
+      .hero-card .stat {
+        padding: 0.8rem;
+      }
+
+      .hero-card .stat strong {
+        font-size: 1.25rem;
+      }
+
+      .section-title {
+        font-size: 1.4rem;
+      }
+
+      .accordion-kz .accordion-button {
+        font-size: 0.95rem;
+        padding: 0.85rem 1rem;
+      }
+
+      .table-kz {
+        font-size: 0.9rem;
+        min-width: 680px;
+      }
+
+      .table-kz td,
+      .table-kz th {
+        padding: 0.75rem 0.65rem;
+      }
+
+      .timeline-item {
+        padding-left: 1.25rem;
+      }
+
+      .timeline-item::before {
+        left: -6px;
+      }
+
+      #pasos .list-group-item {
+        display: block !important;
+      }
+
+      #pasos .list-group-item .fw-bold {
+        display: block;
+        margin-bottom: 0.2rem;
+      }
+    }
   </style>
 </head>
 <body>
