@@ -1,0 +1,844 @@
+<!doctype html>
+<html lang="es-AR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Propuesta para Ferretería Kozlowzki: tienda online para vender más, llegar a nuevos clientes y ordenar pedidos, pagos y envíos.">
+  <title>Ferretería Kozlowzki | Propuesta — Tu tienda online</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" crossorigin="anonymous">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+  <style>
+    :root {
+      --kz-bg: #0c0c0e;
+      --kz-bg-elevated: #141418;
+      --kz-surface: #1a1a20;
+      --kz-border: rgba(255, 255, 255, 0.08);
+      --kz-orange: #f97316;
+      --kz-orange-deep: #ea580c;
+      --kz-orange-glow: rgba(249, 115, 22, 0.35);
+      --kz-text: #f4f4f5;
+      --kz-muted: #a1a1aa;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: "Plus Jakarta Sans", system-ui, sans-serif;
+      background: var(--kz-bg);
+      color: var(--kz-text);
+      line-height: 1.65;
+    }
+
+    .bg-mesh {
+      position: fixed;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -20%, var(--kz-orange-glow), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 100% 0%, rgba(234, 88, 12, 0.12), transparent 50%),
+        radial-gradient(ellipse 50% 30% at 0% 30%, rgba(249, 115, 22, 0.08), transparent 45%),
+        var(--kz-bg);
+    }
+
+    .noise {
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      opacity: 0.04;
+      pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    }
+
+    .navbar-kz {
+      background: rgba(12, 12, 14, 0.75);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--kz-border);
+    }
+
+    .navbar-kz .nav-link {
+      color: var(--kz-muted) !important;
+      font-weight: 500;
+      font-size: 0.9rem;
+      padding: 0.5rem 0.85rem !important;
+      border-radius: 0.5rem;
+      transition: color 0.2s, background 0.2s;
+    }
+
+    .navbar-kz .nav-link:hover {
+      color: var(--kz-text) !important;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    .brand-mark {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      text-decoration: none;
+      color: var(--kz-text) !important;
+    }
+
+    .brand-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: 10px;
+      background: linear-gradient(135deg, var(--kz-orange), var(--kz-orange-deep));
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.1rem;
+      color: #0c0c0e;
+      box-shadow: 0 4px 24px var(--kz-orange-glow);
+    }
+
+    .hero {
+      padding-top: 6rem;
+      padding-bottom: 4rem;
+    }
+
+    @media (min-width: 992px) {
+      .hero {
+        padding-top: 7rem;
+        padding-bottom: 5rem;
+      }
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--kz-orange);
+    }
+
+    .hero h1 {
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+      font-size: clamp(2rem, 5vw, 3.25rem);
+    }
+
+    .hero-lead {
+      color: var(--kz-muted);
+      font-size: 1.1rem;
+      max-width: 36rem;
+    }
+
+    .btn-kz-primary {
+      --bs-btn-color: #0c0c0e;
+      --bs-btn-bg: var(--kz-orange);
+      --bs-btn-border-color: var(--kz-orange);
+      --bs-btn-hover-bg: #fb923c;
+      --bs-btn-hover-border-color: #fb923c;
+      --bs-btn-hover-color: #0c0c0e;
+      --bs-btn-active-bg: var(--kz-orange-deep);
+      --bs-btn-active-border-color: var(--kz-orange-deep);
+      font-weight: 600;
+      padding: 0.65rem 1.35rem;
+      border-radius: 0.65rem;
+    }
+
+    .btn-kz-outline {
+      --bs-btn-color: var(--kz-text);
+      --bs-btn-border-color: var(--kz-border);
+      --bs-btn-hover-bg: rgba(255, 255, 255, 0.06);
+      --bs-btn-hover-border-color: rgba(255, 255, 255, 0.2);
+      font-weight: 600;
+      padding: 0.65rem 1.35rem;
+      border-radius: 0.65rem;
+    }
+
+    .hero-card {
+      background: linear-gradient(145deg, var(--kz-surface), var(--kz-bg-elevated));
+      border: 1px solid var(--kz-border);
+      border-radius: 1.25rem;
+      padding: 1.5rem;
+      box-shadow: 0 24px 80px rgba(0, 0, 0, 0.45);
+    }
+
+    .hero-card .stat {
+      padding: 1rem;
+      border-radius: 0.85rem;
+      background: rgba(249, 115, 22, 0.08);
+      border: 1px solid rgba(249, 115, 22, 0.2);
+    }
+
+    .hero-card .stat strong {
+      display: block;
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--kz-orange);
+      line-height: 1.2;
+    }
+
+    .hero-card .stat span {
+      font-size: 0.85rem;
+      color: var(--kz-muted);
+    }
+
+    section {
+      padding: 4rem 0;
+    }
+
+    .section-title {
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      font-size: 1.75rem;
+      margin-bottom: 0.75rem;
+    }
+
+    .section-sub {
+      color: var(--kz-muted);
+      max-width: 40rem;
+      margin-bottom: 2rem;
+    }
+
+    .card-kz {
+      background: var(--kz-bg-elevated);
+      border: 1px solid var(--kz-border);
+      border-radius: 1rem;
+      height: 100%;
+      transition: border-color 0.25s, transform 0.25s;
+    }
+
+    .card-kz:hover {
+      border-color: rgba(249, 115, 22, 0.35);
+      transform: translateY(-2px);
+    }
+
+    .card-kz .card-body {
+      padding: 1.5rem;
+    }
+
+    .badge-tier {
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      padding: 0.35em 0.65rem;
+      border-radius: 0.35rem;
+    }
+
+    .tier-basic { background: rgba(161, 161, 170, 0.2); color: #e4e4e7; }
+    .tier-plus { background: rgba(249, 115, 22, 0.2); color: var(--kz-orange); }
+    .tier-gold { background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(249, 115, 22, 0.2)); color: #fcd34d; }
+
+    .list-check {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .list-check li {
+      position: relative;
+      padding-left: 1.65rem;
+      margin-bottom: 0.5rem;
+      color: var(--kz-muted);
+      font-size: 0.95rem;
+    }
+
+    .list-check li::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.35rem;
+      width: 1rem;
+      height: 1rem;
+      border-radius: 0.25rem;
+      background: linear-gradient(135deg, var(--kz-orange), var(--kz-orange-deep));
+      opacity: 0.9;
+    }
+
+    .table-kz {
+      --bs-table-bg: transparent;
+      --bs-table-color: var(--kz-text);
+      border-color: var(--kz-border);
+    }
+
+    .table-kz thead th {
+      color: var(--kz-orange);
+      font-weight: 700;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      border-bottom-color: var(--kz-border);
+    }
+
+    .table-kz td,
+    .table-kz th {
+      padding: 1rem 0.75rem;
+      vertical-align: middle;
+    }
+
+    .timeline-item {
+      position: relative;
+      padding-left: 2rem;
+      padding-bottom: 1.5rem;
+      border-left: 2px solid var(--kz-border);
+    }
+
+    .timeline-item:last-child {
+      border-left-color: transparent;
+      padding-bottom: 0;
+    }
+
+    .timeline-item::before {
+      content: "";
+      position: absolute;
+      left: -7px;
+      top: 0.25rem;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--kz-orange);
+      box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.25);
+    }
+
+    .accordion-kz .accordion-item {
+      background: var(--kz-bg-elevated);
+      border: 1px solid var(--kz-border);
+      border-radius: 0.75rem !important;
+      margin-bottom: 0.5rem;
+      overflow: hidden;
+    }
+
+    .accordion-kz .accordion-button {
+      background: transparent;
+      color: var(--kz-text);
+      font-weight: 600;
+      box-shadow: none !important;
+    }
+
+    .accordion-kz .accordion-button:not(.collapsed) {
+      background: rgba(249, 115, 22, 0.1);
+      color: var(--kz-orange);
+    }
+
+    .accordion-kz .accordion-button::after {
+      filter: invert(1);
+    }
+
+    .accordion-kz .accordion-body {
+      color: var(--kz-muted);
+      border-top: 1px solid var(--kz-border);
+    }
+
+    footer {
+      border-top: 1px solid var(--kz-border);
+      padding: 2.5rem 0;
+      color: var(--kz-muted);
+      font-size: 0.9rem;
+    }
+
+    .footer-brand {
+      color: var(--kz-text);
+      font-weight: 700;
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-mesh" aria-hidden="true"></div>
+  <div class="noise" aria-hidden="true"></div>
+
+  <nav class="navbar navbar-expand-lg fixed-top navbar-kz">
+    <div class="container">
+      <a class="navbar-brand brand-mark" href="#top">
+        <span class="brand-icon" aria-hidden="true">K</span>
+        <span class="d-flex flex-column lh-sm">
+          <span class="fw-bold" style="font-size: 1rem;">Ferretería Kozlowzki</span>
+          <span class="text-secondary small">Propuesta · Vender por internet</span>
+        </span>
+      </a>
+      <button class="navbar-toggler border-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#navKz" aria-controls="navKz" aria-expanded="false" aria-label="Abrir menú">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navKz">
+        <ul class="navbar-nav ms-auto gap-lg-1 mt-3 mt-lg-0">
+          <li class="nav-item"><a class="nav-link" href="#resumen">Por qué</a></li>
+          <li class="nav-item"><a class="nav-link" href="#alcance">Qué incluye</a></li>
+          <li class="nav-item"><a class="nav-link" href="#funcionalidades">Cómo funciona</a></li>
+          <li class="nav-item"><a class="nav-link" href="#opciones">Modalidades</a></li>
+          <li class="nav-item"><a class="nav-link" href="#inversion">Inversión</a></li>
+          <li class="nav-item"><a class="nav-link" href="#stack">Herramientas</a></li>
+          <li class="nav-item"><a class="nav-link" href="#entregables">Qué reciben</a></li>
+          <li class="nav-item"><a class="nav-link" href="#fases">Plazos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#riesgos">Qué necesitamos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#pasos">Siguiente paso</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="container">
+      <div class="row align-items-center g-4 g-lg-5">
+        <div class="col-lg-7">
+          <p class="eyebrow mb-2"><i class="bi bi-shop-window"></i> Más ventas · Más alcance · Menos vueltas</p>
+          <h1>Su ferretería abierta también en internet</h1>
+          <p class="hero-lead mt-3">Esta propuesta es para <strong class="text-white">Ferretería Kozlowzki</strong>: una tienda donde la gente puede ver productos, armar el pedido y pagar como prefiera, retirar en Jardín América o Puerto Rico o recibir envíos en todo el país. <strong class="text-white">No reemplaza el local</strong>: lo potencia —llega a quien hoy no pasa por la caja, ordena pedidos fuera del horario y deja el equipo trabajar con información clara.</p>
+          <div class="d-flex flex-wrap gap-2 mt-4">
+            <a class="btn btn-kz-primary" href="#opciones">Ver modalidades</a>
+            <a class="btn btn-kz-outline" href="#pasos">Quiero avanzar</a>
+          </div>
+        </div>
+        <div class="col-lg-5">
+          <div class="hero-card">
+            <p class="text-secondary small mb-3">Su negocio hoy</p>
+            <div class="row g-2">
+              <div class="col-6">
+                <div class="stat">
+                  <strong>2</strong>
+                  <span>Sucursales<br>Jardín América · Puerto Rico</span>
+                </div>
+              </div>
+              <div class="col-6">
+                <div class="stat">
+                  <strong>500+</strong>
+                  <span>Productos<br>publicación inicial</span>
+                </div>
+              </div>
+              <div class="col-12 mt-2">
+                <div class="stat py-3">
+                  <strong class="d-inline">Stock físico</strong>
+                  <span class="d-block mt-1">Construcción, herramientas, pinturería, electricidad, plomería y equipamiento para piscinas · Envíos a todo el país</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="resumen" class="border-top border-secondary border-opacity-25">
+      <div class="container">
+        <h2 class="section-title">1. De qué se trata</h2>
+        <p class="section-sub mb-0">En pocas palabras.</p>
+        <div class="p-4 rounded-4" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+          <p class="mb-3 text-secondary">Ustedes ya tienen <strong class="text-white">producto y stock en Jardín América y Puerto Rico</strong> y un surtido grande para publicar. Una tienda online es el canal para <strong class="text-white">vender a más gente</strong>: la que está en otra ciudad, la que prefiere mirar precios tranquila, la obra que necesita mandar un pedido sin ir al mostrador. También ayuda a <strong class="text-white">no perder ventas</strong> porque quedan registrados pedidos, formas de pago y envíos en un solo lugar.</p>
+          <p class="mb-0 text-secondary"><strong class="text-white">¿Esto solo garantiza más facturación?</strong> Nadie puede prometer un número mágico: depende de precios, stock y cómo difundan el sitio. Lo que sí ofrece es <strong class="text-white">más oportunidades de venta</strong> (canal 24/7, más alcance geográfico, menos fricción para el cliente) y <strong class="text-white">un proceso más ordenado</strong> para el equipo. El plan se puede encarar por etapas —incluida la posibilidad de conectar después la tienda con el sistema de facturación y stock que ya usan— y el objetivo de trabajo es <strong class="text-white">alrededor de dos meses</strong> para tener la tienda funcionando, según la modalidad elegida.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="alcance" class="border-top border-secondary border-opacity-25">
+      <div class="container">
+        <h2 class="section-title">2. Qué incluye y qué no</h2>
+        <p class="section-sub">Así quedan claras las expectativas y no hay sorpresas.</p>
+        <div class="row g-4">
+          <div class="col-md-6">
+            <div class="card card-kz h-100">
+              <div class="card-body">
+                <h3 class="h5 text-white mb-3"><i class="bi bi-check-circle text-warning me-2"></i>Incluye <span class="text-secondary fw-normal fs-6">(según la modalidad)</span></h3>
+                <ul class="list-check">
+                  <li>Ayuda para organizar cómo se muestran los productos y las reglas de envío</li>
+                  <li>La tienda en sí: catálogo, carrito, cierre de compra</li>
+                  <li>Un panel sencillo para que ustedes carguen y actualicen productos</li>
+                  <li>Los medios de pago que acordemos (transferencia, efectivo, Mercado Pago, tarjetas, etc.)</li>
+                  <li>Pruebas antes de salir al aire y acompañamiento el día del lanzamiento</li>
+                  <li>Capacitación para el día a día y una guía corta por escrito</li>
+                  <li>Según el plan: vínculo con su sistema de facturación y stock</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="card card-kz h-100">
+              <div class="card-body">
+                <h3 class="h5 text-white mb-3"><i class="bi bi-slash-circle text-secondary me-2"></i>No incluye <span class="text-secondary fw-normal fs-6">(salvo que lo charlemos aparte)</span></h3>
+                <ul class="list-check">
+                  <li>El nombre del sitio en internet y el servidor: se cotizan o los contratan ustedes</li>
+                  <li>Fotografía profesional de todo el depósito</li>
+                  <li>Texto publicitario de cada producto hecho de punta a punta por nosotros</li>
+                  <li>Abogado para términos legales: podemos dejar una base para que su asesor la revise</li>
+                  <li>Mantenimiento mensual después del período inicial acordado</li>
+                  <li>Aplicación descargable para celular (tipo Mercado Libre): no hace falta para empezar</li>
+                  <li>Conexiones con programas que no hayamos acordado al inicio</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="funcionalidades" class="border-top border-secondary border-opacity-25">
+      <div class="container">
+        <h2 class="section-title">3. Cómo va a funcionar la tienda</h2>
+        <p class="section-sub">Lo que su cliente ve y lo que ustedes controlan por detrás —pensado para un catálogo grande y ventas en la zona y en todo el país.</p>
+        <div class="accordion accordion-kz" id="accFunc">
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#f1">Catálogo claro, como en el negocio</button>
+            </h3>
+            <div id="f1" class="accordion-collapse collapse show" data-bs-parent="#accFunc">
+              <div class="accordion-body">Productos ordenados por rubros (construcción, herramientas, pinturería, electricidad, plomería, piscinas, etc.). Cada uno con foto, descripción, precio y, si corresponde, si hay o no hay en depósito o “consultar”. Si un ítem tiene variantes (medida, color), también se puede mostrar.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f2">Buscar, comparar y armar el pedido</button>
+            </h3>
+            <div id="f2" class="accordion-collapse collapse" data-bs-parent="#accFunc">
+              <div class="accordion-body">Buscador y filtros por tipo de producto, marca o rango de precio. El cliente arma el carrito y ve cómo queda el envío según la zona (Jardín América, Puerto Rico o resto del país, según las reglas que definamos). Puede elegir retiro en sucursal o que se lo manden.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f3">Pagar como la gente ya está acostumbrada</button>
+            </h3>
+            <div id="f3" class="accordion-collapse collapse" data-bs-parent="#accFunc">
+              <div class="accordion-body">Transferencia con datos claros, efectivo al recibir si aplica, Mercado Pago y tarjetas según lo que habiliten. Opcionalmente cuentas de cliente para quien compre seguido: historial de pedidos y direcciones guardadas.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#f4">Ustedes al mando: productos, pedidos y, si corresponde, el sistema de gestión</button>
+            </h3>
+            <div id="f4" class="accordion-collapse collapse" data-bs-parent="#accFunc">
+              <div class="accordion-body">Desde un panel cargan precios, ofertas simples y el estado de cada pedido (pendiente, listo, enviado, etc.). El sitio se ve bien en celular. Si el plan lo incluye, la tienda puede hablar con el programa que ya usan para facturas y stock, para no cargar dos veces lo mismo.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="opciones" class="border-top border-secondary border-opacity-25">
+      <div class="container">
+        <h2 class="section-title">4. Tres modalidades para elegir</h2>
+        <p class="section-sub">Los planes <strong class="text-white">Básico, Premium o Gold</strong> se pueden armar sobre estas tres ideas, según cuánto quieran invertir y si priorizan salir rápido o tener todo conectado al programa de gestión desde el principio.</p>
+        <div class="row g-4">
+          <div class="col-lg-4">
+            <div class="card card-kz">
+              <div class="card-body">
+                <span class="badge-tier tier-basic mb-2">Modalidad A · La más accesible</span>
+                <h3 class="h5 text-white mt-2">Tienda lista para vender</h3>
+                <p class="text-secondary small mb-3">Catálogo, pedidos y cobros online. Ustedes actualizan disponibilidad desde el panel; cuando entra un pedido, cargan la factura en su sistema como hoy, a mano. Ideal para <strong class="text-white">empezar fuerte sin esperar meses</strong>.</p>
+                <p class="small text-white mb-1"><strong class="text-warning">Ventaja</strong> menos inversión y antes en el mercado; prueban si el canal online les rinde.</p>
+                <p class="small text-secondary mb-0"><strong>A tener en cuenta</strong> hay un paso manual entre la web y el sistema de facturación.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card card-kz border-warning border-opacity-25" style="box-shadow: 0 0 0 1px rgba(249, 115, 22, 0.15);">
+              <div class="card-body">
+                <span class="badge-tier tier-plus mb-2">Modalidad B · Equilibrada</span>
+                <h3 class="h5 text-white mt-2">Tienda con stock ordenado en la web</h3>
+                <p class="text-secondary small mb-3">Todo lo anterior, más control de qué hay en cada sucursal (o unificado), avisos cuando algo está bajo y reportes útiles desde el panel. La facturación en el sistema de gestión puede seguir un proceso definido hasta que conectemos todo.</p>
+                <p class="small text-white mb-1"><strong class="text-warning">Ventaja</strong> el cliente ve información más fiel; menos errores de “vendí algo que no había”.</p>
+                <p class="small text-secondary mb-0"><strong>A tener en cuenta</strong> sigue haciendo falta trabajo humano en facturación si aún no está vinculado el programa.</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card card-kz">
+              <div class="card-body">
+                <span class="badge-tier tier-gold mb-2">Modalidad C · Todo integrado</span>
+                <h3 class="h5 text-white mt-2">Tienda hablando con su sistema actual</h3>
+                <p class="text-secondary small mb-3">Productos, stock y/o pedidos sincronizados con el software que ya usan, cuando el fabricante del programa lo permite. <strong class="text-white">Menos doble carga y menos confusiones</strong> entre mostrador y web.</p>
+                <p class="small text-white mb-1"><strong class="text-warning">Ventaja</strong> un solo lugar “dueño” de los datos; el equipo gana tiempo.</p>
+                <p class="small text-secondary mb-0"><strong>A tener en cuenta</strong> mayor costo y a veces más tiempo, según qué tan fácil sea conectar ese programa.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <p class="text-secondary mt-4 mb-0 small"><i class="bi bi-arrow-right-short text-warning"></i> <strong class="text-white">Recomendación:</strong> si el presupuesto o el calendario aprietan, se puede ir A y después B o C. Si lo central es no cargar datos dos veces desde el día uno, conviene evaluar C —siempre que el proveedor del sistema de gestión confirme que se puede hacer en tiempo razonable.</p>
+      </div>
+    </section>
+
+    <section id="inversion" class="border-top border-secondary border-opacity-25">
+      <div class="container">
+        <h2 class="section-title">5. Inversión estimada (U$D)</h2>
+        <p class="section-sub">Valores de referencia para decidir rápido. Se ajustan en la propuesta final según alcance definitivo, nivel de integración con su sistema y volumen real de carga inicial.</p>
+
+        <div class="table-responsive rounded-3 overflow-hidden border border-secondary border-opacity-25 mb-4">
+          <table class="table table-kz table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Plan de desarrollo</th>
+                <th>Qué incluye</th>
+                <th class="text-nowrap">Inversión única (U$D)</th>
+              </tr>
+            </thead>
+            <tbody class="text-secondary">
+              <tr>
+                <td class="text-white fw-semibold">Básico (Modalidad A)</td>
+                <td>Tienda lista para vender, catálogo, carrito, pagos y envíos, panel para gestión diaria y capacitación inicial</td>
+                <td class="text-white fw-semibold"><span class="text-secondary text-decoration-line-through me-2">U$D 2.200</span>U$D 1.900</td>
+              </tr>
+              <tr>
+                <td class="text-white fw-semibold">Premium (Modalidad B)</td>
+                <td>Todo lo del Básico + control de stock más fino en la web, reglas por sucursal, reportes operativos y apoyo ampliado en salida</td>
+                <td class="text-white fw-semibold"><span class="text-secondary text-decoration-line-through me-2">U$D 3.800</span>U$D 3.200</td>
+              </tr>
+              <tr>
+                <td class="text-white fw-semibold">Gold (Modalidad C)</td>
+                <td>Todo lo del Premium + integración con facturación y/o stock del sistema actual (según factibilidad del proveedor)</td>
+                <td class="text-white fw-semibold"><span class="text-secondary text-decoration-line-through me-2">U$D 6.500</span>U$D 4.500</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="table-responsive rounded-3 overflow-hidden border border-secondary border-opacity-25">
+          <table class="table table-kz table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Plan de soporte mensual</th>
+                <th>Qué cubre</th>
+                <th class="text-nowrap">Abono mensual (U$D)</th>
+              </tr>
+            </thead>
+            <tbody class="text-secondary">
+              <tr>
+                <td class="text-white fw-semibold">Soporte Base</td>
+                <td>Actualizaciones, backups, control general del sitio y hasta 2 horas/mes para ajustes menores</td>
+                <td class="text-white fw-semibold">U$D 120 / mes</td>
+              </tr>
+              <tr>
+                <td class="text-white fw-semibold">Soporte Activo</td>
+                <td>Todo lo anterior + prioridad de respuesta y hasta 5 horas/mes para mejoras y cambios chicos</td>
+                <td class="text-white fw-semibold">U$D 260 / mes</td>
+              </tr>
+              <tr>
+                <td class="text-white fw-semibold">Soporte Partner</td>
+                <td>Todo lo anterior + acompañamiento operativo continuo, hasta 10 horas/mes para evolutivos cortos y gestión de posicionamiento SEO en Google (optimización de títulos, descripciones, estructura y seguimiento mensual básico)</td>
+                <td class="text-white fw-semibold">U$D 480 / mes</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="mt-4 p-4 rounded-3" style="background: rgba(249, 115, 22, 0.08); border: 1px solid rgba(249, 115, 22, 0.25);">
+          <h3 class="h6 text-white mb-2"><i class="bi bi-info-circle text-warning me-2"></i>Aclaraciones importantes</h3>
+          <ul class="list-check mb-0">
+            <li>Los valores están expresados en dólares estadounidenses (U$D) y son referencia comercial inicial.</li>
+            <li>El plan Gold puede variar según la facilidad real de integración con el sistema actual y la respuesta del proveedor.</li>
+            <li>No incluye comisiones de pasarela de pago, costos de dominio/hosting ni pauta publicitaria paga (Google Ads / Meta Ads).</li>
+            <li>Los abonos de mantenimiento se revisan cada <strong class="text-white">3 meses</strong> según costos de infraestructura, tipo de cambio y alcance de soporte.</li>
+            <li>Cualquier ajuste del abono se comunica por escrito con anticipación y aplica al período siguiente.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="stack" class="border-top border-secondary border-opacity-25">
+      <div class="container">
+        <h2 class="section-title">6. Con qué lo hacemos (sin complicar)</h2>
+        <p class="section-sub">Ustedes no tienen que saber de esto: solo que usamos <strong class="text-white">herramientas usadas por miles de negocios</strong>, seguras para cobrar y para que el sitio cargue bien en celular. El detalle exacto lo cerramos en una reunión según presupuesto y qué necesitan.</p>
+        <div class="row g-3">
+          <div class="col-md-6 col-xl-3">
+            <div class="p-3 rounded-3 h-100" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <i class="bi bi-grid-1x2 text-warning fs-4"></i>
+              <h3 class="h6 text-white mt-2">La tienda en sí</h3>
+              <p class="small text-secondary mb-0">Plataformas probadas para muchos productos y categorías; elegimos una que se ajuste a lo que quieren gastar por mes y al nivel de personalización.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="p-3 rounded-3 h-100" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <i class="bi bi-credit-card text-warning fs-4"></i>
+              <h3 class="h6 text-white mt-2">Cobros</h3>
+              <p class="small text-secondary mb-0">Mercado Pago para tarjetas y lo que ofrezcan, más reglas claras para transferencia y pago en efectivo al entregar.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="p-3 rounded-3 h-100" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <i class="bi bi-hdd-network text-warning fs-4"></i>
+              <h3 class="h6 text-white mt-2">Dónde vive el sitio</h3>
+              <p class="small text-secondary mb-0">Servidor confiable según visitas esperadas; conexión segura (candado verde en el navegador) para que la gente confíe al pagar.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-xl-3">
+            <div class="p-3 rounded-3 h-100" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <i class="bi bi-link-45deg text-warning fs-4"></i>
+              <h3 class="h6 text-white mt-2">Conexión con su sistema</h3>
+              <p class="small text-secondary mb-0">Cuando el plan lo incluye, vemos la forma más estable de que la web y el programa de facturación/stock se hablen —automático o con rutinas programadas, según lo que permita su proveedor.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="entregables" class="border-top border-secondary border-opacity-25">
+      <div class="container">
+        <h2 class="section-title">7. Qué reciben al finalizar</h2>
+        <p class="section-sub">Todo lo necesario para <strong class="text-white">vender de verdad</strong>, no solo “un sitio armado”.</p>
+        <div class="row g-3">
+          <div class="col-md-6 col-lg-4">
+            <div class="d-flex gap-3 p-3 rounded-3 h-100" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <span class="text-warning fs-4"><i class="bi bi-globe2"></i></span>
+              <div><strong class="text-white d-block">Tienda publicada y lista para compartir</strong><span class="text-secondary small">Nombre web y seguridad para cobrar con confianza</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="d-flex gap-3 p-3 rounded-3 h-100" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <span class="text-warning fs-4"><i class="bi bi-speedometer2"></i></span>
+              <div><strong class="text-white d-block">Panel para el día a día</strong><span class="text-secondary small">Quién puede entrar y qué puede hacer cada uno</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="d-flex gap-3 p-3 rounded-3 h-100" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <span class="text-warning fs-4"><i class="bi bi-wallet2"></i></span>
+              <div><strong class="text-white d-block">Cobros y envíos acordados</strong><span class="text-secondary small">Lo que charlamos en la propuesta, funcionando</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="d-flex gap-3 p-3 rounded-3 h-100" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <span class="text-warning fs-4"><i class="bi bi-mortarboard"></i></span>
+              <div><strong class="text-white d-block">Capacitación para el equipo</strong><span class="text-secondary small">Reunión(es) prácticas; grabación si les sirve</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="d-flex gap-3 p-3 rounded-3 h-100" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <span class="text-warning fs-4"><i class="bi bi-journal-text"></i></span>
+              <div><strong class="text-white d-block">Guía escrita corta</strong><span class="text-secondary small">Cómo cargar productos, precios y pedidos</span></div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="d-flex gap-3 p-3 rounded-3 h-100" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <span class="text-warning fs-4"><i class="bi bi-tools"></i></span>
+              <div><strong class="text-white d-block">Acompañamiento inicial</strong><span class="text-secondary small">Tiempo de ajustes acordado después del lanzamiento</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="fases" class="border-top border-secondary border-opacity-25">
+      <div class="container">
+        <h2 class="section-title">8. Cómo avanza el trabajo y cuánto demora</h2>
+        <p class="section-sub">Meta realista: <strong class="text-white">alrededor de dos meses</strong> para tener la tienda vendiendo, según la modalidad. Si el plan incluye conexión total con el sistema de gestión y el proveedor del programa demora en dar accesos, puede llevar un poco más: en ese caso suele convenir <strong class="text-white">abrir la tienda primero</strong> y conectar el programa en una segunda etapa.</p>
+        <div class="table-responsive rounded-3 overflow-hidden border border-secondary border-opacity-25">
+          <table class="table table-kz table-hover mb-0">
+            <thead>
+              <tr>
+                <th>Etapa</th>
+                <th>Qué hacemos</th>
+                <th class="text-nowrap">Tiempo orientativo</th>
+              </tr>
+            </thead>
+            <tbody class="text-secondary">
+              <tr>
+                <td class="text-white fw-semibold">1 — Arranque y diseño</td>
+                <td>Nos alineamos con cómo venden, cómo organizan rubros y cómo debe verse la marca en la tienda</td>
+                <td>Semanas 1–2</td>
+              </tr>
+              <tr>
+                <td class="text-white fw-semibold">2 — Armado de la tienda</td>
+                <td>Construcción del sitio, primera carga de productos con apoyo, cobros y envíos</td>
+                <td>Semanas 3–5</td>
+              </tr>
+              <tr>
+                <td class="text-white fw-semibold">3 — Conexión con su sistema</td>
+                <td>Si corresponde (modalidad C): unir la web con facturación y stock; puede solaparse con la etapa anterior</td>
+                <td>Semanas 4–8</td>
+              </tr>
+              <tr>
+                <td class="text-white fw-semibold">4 — Pruebas y salida al público</td>
+                <td>Probar compras de punta a punta, ajustes finales, capacitación del equipo</td>
+                <td>Semanas 7–8</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="mt-4">
+          <h3 class="h6 text-warning text-uppercase small letter-spacing-1 mb-3">Resumen en línea de tiempo</h3>
+          <div class="timeline-item"><strong class="text-white">Semanas 1–2</strong><p class="text-secondary small mb-0">Reunión de inicio, definición de categorías y aspecto visual.</p></div>
+          <div class="timeline-item"><strong class="text-white">Semanas 3–5</strong><p class="text-secondary small mb-0">Tienda armada, productos entrando, reglas de cobro y envío.</p></div>
+          <div class="timeline-item"><strong class="text-white">Semanas 4–8</strong><p class="text-secondary small mb-0">Vínculo con el programa de gestión, si está en el plan.</p></div>
+          <div class="timeline-item"><strong class="text-white">Cierre</strong><p class="text-secondary small mb-0">Últimas pruebas, día de lanzamiento, entrega de guía y capacitación.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="riesgos" class="border-top border-secondary border-opacity-25">
+      <div class="container">
+        <h2 class="section-title">9. Para que salga bien, necesitamos de ustedes</h2>
+        <p class="section-sub">No son trabas: son <strong class="text-white">los insumos</strong> para que la tienda refleje el negocio real y no retrase el lanzamiento.</p>
+        <div class="row g-3">
+          <div class="col-md-6">
+            <div class="p-4 h-100 rounded-3" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <h3 class="h6 text-white"><i class="bi bi-image text-warning me-2"></i>Fotos y datos de los productos</h3>
+              <p class="text-secondary small mb-0">Imágenes, medidas donde haga falta, textos y precios. Sin eso no se puede publicar bien un catálogo de más de 500 ítems.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-4 h-100 rounded-3" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <h3 class="h6 text-white"><i class="bi bi-router text-warning me-2"></i>Nombre del sitio y servidor</h3>
+              <p class="text-secondary small mb-0">Decidir el dominio (ej. ferrekozlowzki.com.ar) y contratar el alojamiento a tiempo, o delegarnos la compra según lo acordado.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-4 h-100 rounded-3" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <h3 class="h6 text-white"><i class="bi bi-database-gear text-warning me-2"></i>Su programa de facturación y stock</h3>
+              <p class="text-secondary small mb-0">Nombre del software, acceso de prueba si hace falta y contacto del soporte del proveedor —así evaluamos la conexión con la web sin idas y vueltas.</p>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="p-4 h-100 rounded-3" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+              <h3 class="h6 text-white"><i class="bi bi-truck text-warning me-2"></i>Cobros y envíos definidos</h3>
+              <p class="text-secondary small mb-0">Cuenta de Mercado Pago a nombre del negocio y reglas claras: cuánto cobran de envío por zona, envío propio o moto/mudanza, peso o volumen si aplica.</p>
+            </div>
+          </div>
+          <div class="col-12">
+            <div class="p-4 rounded-3" style="background: rgba(249, 115, 22, 0.08); border: 1px solid rgba(249, 115, 22, 0.25);">
+              <h3 class="h6 text-white"><i class="bi bi-shield-check text-warning me-2"></i>Datos del negocio en el sitio</h3>
+              <p class="text-secondary small mb-0">Razón social, CUIT y textos legales básicos: lo revisa su contador o abogado; nosotros podemos dejar el lugar indicado en la página.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="pasos" class="border-top border-secondary border-opacity-25 pb-5">
+      <div class="container">
+        <h2 class="section-title">10. Siguiente paso</h2>
+        <p class="section-sub">Así pasamos del interés a <strong class="text-white">números, fechas y arranque</strong>.</p>
+        <ol class="list-group list-group-numbered list-group-flush rounded-3 overflow-hidden border border-secondary border-opacity-25">
+          <li class="list-group-item d-flex gap-3 align-items-start py-3" style="background: var(--kz-bg-elevated); color: var(--kz-muted); border-color: var(--kz-border);">
+            <span class="fw-bold text-white">Charla de 30–45 minutos</span> — Definimos modalidad (A, B o C), cómo quieren mostrar las dos sucursales al cliente y si la prioridad es la conexión con el sistema de gestión.
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start py-3" style="background: var(--kz-bg-elevated); color: var(--kz-muted); border-color: var(--kz-border);">
+            <span class="fw-bold text-white">Qué programa usan hoy</span> — Nombre del software de facturación y stock y, si lo saben, si el proveedor ofrece forma de enlazarlo con una tienda.
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start py-3" style="background: var(--kz-bg-elevated); color: var(--kz-muted); border-color: var(--kz-border);">
+            <span class="fw-bold text-white">Propuesta con precios</span> — Plan Básico, Premium o Gold con montos y forma de pago por etapas.
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start py-3" style="background: var(--kz-bg-elevated); color: var(--kz-muted); border-color: var(--kz-border);">
+            <span class="fw-bold text-white">Acuerdo y materiales</span> — Firma, logo, colores de marca y quién contrata el nombre del sitio y el servidor si aplica.
+          </li>
+          <li class="list-group-item d-flex gap-3 align-items-start py-3" style="background: var(--kz-bg-elevated); color: var(--kz-muted); border-color: var(--kz-border);">
+            <span class="fw-bold text-white">Arranque oficial</span> — Calendario semana a semana para que sepan qué pasa en cada etapa.
+          </li>
+        </ol>
+        <div class="text-center mt-5 p-4 rounded-4" style="background: linear-gradient(135deg, rgba(249, 115, 22, 0.15), rgba(12, 12, 14, 0.9)); border: 1px solid rgba(249, 115, 22, 0.3);">
+          <p class="text-white mb-2 fw-semibold">¿Coordinamos esa primera reunión?</p>
+          <p class="text-secondary small mb-0">Esta página resume la idea general. Precios finales, plazos y responsabilidades quedan por escrito en la propuesta y el contrato que firmen.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="row align-items-center gy-3">
+        <div class="col-md-8">
+          <p class="mb-0"><span class="footer-brand">Ferretería Kozlowzki</span> — Propuesta tienda online · Jardín América · Puerto Rico · Envíos a todo el país</p>
+        </div>
+        <div class="col-md-4 text-md-end">
+          <span class="text-secondary small">Documento para compartir · Listo para publicar en internet</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
+</body>
+</html>
