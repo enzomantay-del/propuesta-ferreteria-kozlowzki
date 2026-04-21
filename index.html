@@ -341,6 +341,10 @@
       font-weight: 700;
     }
 
+    .inversion-mobile {
+      display: none;
+    }
+
     @media (max-width: 991.98px) {
       .navbar-kz .navbar-collapse {
         margin-top: 0.75rem;
@@ -425,6 +429,36 @@
       #pasos .list-group-item .fw-bold {
         display: block;
         margin-bottom: 0.2rem;
+      }
+
+      #inversion .table-responsive {
+        display: none;
+      }
+
+      .inversion-mobile {
+        display: block;
+      }
+
+      .inversion-mobile .card-kz .card-body {
+        padding: 1.1rem;
+      }
+
+      .inversion-mobile .price-old {
+        font-size: 0.85rem;
+      }
+
+      .inversion-mobile .price-new {
+        font-size: 1.15rem;
+        font-weight: 800;
+        color: var(--kz-orange);
+      }
+
+      #riesgos .needs-card {
+        padding: 1rem !important;
+      }
+
+      #riesgos .needs-card h3 {
+        font-size: 0.95rem;
       }
     }
   </style>
@@ -703,6 +737,70 @@
           </table>
         </div>
 
+        <div class="inversion-mobile mt-3">
+          <p class="text-secondary small mb-2">Desarrollo (inversión única)</p>
+          <div class="row g-3">
+            <div class="col-12">
+              <div class="card card-kz">
+                <div class="card-body">
+                  <h3 class="h6 text-white mb-1">Básico (Modalidad A)</h3>
+                  <p class="small text-secondary mb-2">Tienda lista para vender, catálogo, carrito, pagos y envíos, panel para gestión diaria y capacitación inicial.</p>
+                  <p class="mb-0"><span class="text-secondary text-decoration-line-through me-2 price-old">U$D 2.200</span><span class="price-new">U$D 1.900</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card card-kz">
+                <div class="card-body">
+                  <h3 class="h6 text-white mb-1">Premium (Modalidad B)</h3>
+                  <p class="small text-secondary mb-2">Todo lo del Básico + control de stock más fino en la web, reglas por sucursal, reportes y apoyo ampliado en salida.</p>
+                  <p class="mb-0"><span class="text-secondary text-decoration-line-through me-2 price-old">U$D 3.800</span><span class="price-new">U$D 3.200</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card card-kz">
+                <div class="card-body">
+                  <h3 class="h6 text-white mb-1">Gold (Modalidad C)</h3>
+                  <p class="small text-secondary mb-2">Todo lo del Premium + integración con facturación y/o stock del sistema actual (según factibilidad del proveedor).</p>
+                  <p class="mb-0"><span class="text-secondary text-decoration-line-through me-2 price-old">U$D 6.500</span><span class="price-new">U$D 4.500</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <p class="text-secondary small mb-2 mt-4">Soporte mensual</p>
+          <div class="row g-3">
+            <div class="col-12">
+              <div class="card card-kz">
+                <div class="card-body">
+                  <h3 class="h6 text-white mb-1">Soporte Base</h3>
+                  <p class="small text-secondary mb-2">Actualizaciones, backups, control general del sitio y hasta 2 horas/mes para ajustes menores.</p>
+                  <p class="mb-0"><span class="price-new">U$D 120 / mes</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card card-kz">
+                <div class="card-body">
+                  <h3 class="h6 text-white mb-1">Soporte Activo</h3>
+                  <p class="small text-secondary mb-2">Todo lo anterior + prioridad de respuesta y hasta 5 horas/mes para mejoras y cambios chicos.</p>
+                  <p class="mb-0"><span class="price-new">U$D 260 / mes</span></p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card card-kz">
+                <div class="card-body">
+                  <h3 class="h6 text-white mb-1">Soporte Partner</h3>
+                  <p class="small text-secondary mb-2">Todo lo anterior + acompañamiento operativo continuo, evolutivos cortos y gestión de posicionamiento SEO en Google.</p>
+                  <p class="mb-0"><span class="price-new">U$D 480 / mes</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
         <div class="mt-4 p-4 rounded-3" style="background: rgba(249, 115, 22, 0.08); border: 1px solid rgba(249, 115, 22, 0.25);">
           <h3 class="h6 text-white mb-2"><i class="bi bi-info-circle text-warning me-2"></i>Aclaraciones importantes</h3>
           <ul class="list-check mb-0">
@@ -851,31 +949,31 @@
         <p class="section-sub">No son trabas: son <strong class="text-white">los insumos</strong> para que la tienda refleje el negocio real y no retrase el lanzamiento.</p>
         <div class="row g-3">
           <div class="col-md-6">
-            <div class="p-4 h-100 rounded-3" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+            <div class="p-4 h-100 rounded-3 needs-card" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
               <h3 class="h6 text-white"><i class="bi bi-image text-warning me-2"></i>Fotos y datos de los productos</h3>
               <p class="text-secondary small mb-0">Imágenes, medidas donde haga falta, textos y precios. Sin eso no se puede publicar bien un catálogo de más de 500 ítems.</p>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="p-4 h-100 rounded-3" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+            <div class="p-4 h-100 rounded-3 needs-card" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
               <h3 class="h6 text-white"><i class="bi bi-router text-warning me-2"></i>Nombre del sitio y servidor</h3>
               <p class="text-secondary small mb-0">Decidir el dominio (ej. ferrekozlowzki.com.ar) y contratar el alojamiento a tiempo, o delegarnos la compra según lo acordado.</p>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="p-4 h-100 rounded-3" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+            <div class="p-4 h-100 rounded-3 needs-card" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
               <h3 class="h6 text-white"><i class="bi bi-database-gear text-warning me-2"></i>Su programa de facturación y stock</h3>
               <p class="text-secondary small mb-0">Nombre del software, acceso de prueba si hace falta y contacto del soporte del proveedor —así evaluamos la conexión con la web sin idas y vueltas.</p>
             </div>
           </div>
           <div class="col-md-6">
-            <div class="p-4 h-100 rounded-3" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
+            <div class="p-4 h-100 rounded-3 needs-card" style="background: var(--kz-bg-elevated); border: 1px solid var(--kz-border);">
               <h3 class="h6 text-white"><i class="bi bi-truck text-warning me-2"></i>Cobros y envíos definidos</h3>
               <p class="text-secondary small mb-0">Cuenta de Mercado Pago a nombre del negocio y reglas claras: cuánto cobran de envío por zona, envío propio o moto/mudanza, peso o volumen si aplica.</p>
             </div>
           </div>
           <div class="col-12">
-            <div class="p-4 rounded-3" style="background: rgba(249, 115, 22, 0.08); border: 1px solid rgba(249, 115, 22, 0.25);">
+            <div class="p-4 rounded-3 needs-card" style="background: rgba(249, 115, 22, 0.08); border: 1px solid rgba(249, 115, 22, 0.25);">
               <h3 class="h6 text-white"><i class="bi bi-shield-check text-warning me-2"></i>Datos del negocio en el sitio</h3>
               <p class="text-secondary small mb-0">Razón social, CUIT y textos legales básicos: lo revisa su contador o abogado; nosotros podemos dejar el lugar indicado en la página.</p>
             </div>
